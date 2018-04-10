@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="201804102101-01" author="Suched">
+        <createTable tableName="bbt_member_type">
+            <column name="pk_id" type="BIGINT">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="VARCHAR(200)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="minimum_salary" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <insert tableName="bbt_member_type">
+            <column name="pk_id">1</column>
+            <column name="name">Silver</column>
+            <column name="minimum_salary">0</column>
+        </insert>
+
+        <insert tableName="bbt_member_type">
+            <column name="pk_id">2</column>
+            <column name="name">Gold</column>
+            <column name="minimum_salary">30000</column>
+        </insert>
+
+        <insert tableName="bbt_member_type">
+            <column name="pk_id">3</column>
+            <column name="name">Platinum</column>
+            <column name="minimum_salary">50000</column>
+        </insert>
+    </changeSet>
+
+    <changeSet id="201804102101-02" author="Suched">
+        <createTable tableName="bbt_user">
+            <column name="pk_id" type="BIGINT">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="member_type_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="username" type="VARCHAR(200)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="VARCHAR(80)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="address" type="VARCHAR(2000)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="phone" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="ref_code" type="VARCHAR(12)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="salary" type="INT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createSequence sequenceName="seq_bbt_user_pk_id"/>
+
+        <addForeignKeyConstraint constraintName="fk_bbt_user_bbt_member_type"
+                                 baseTableName="bbt_user"
+                                 baseColumnNames="member_type_id"
+                                 referencedTableName="bbt_member_type"
+                                 referencedColumnNames="pk_id"/>
+    </changeSet>
+
+</databaseChangeLog>
