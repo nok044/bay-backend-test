@@ -22,7 +22,7 @@
         <insert tableName="bbt_member_type">
             <column name="pk_id">1</column>
             <column name="name">Silver</column>
-            <column name="minimum_salary">0</column>
+            <column name="minimum_salary">15000</column>
         </insert>
 
         <insert tableName="bbt_member_type">

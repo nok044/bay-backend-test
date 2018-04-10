@@ -22,7 +22,7 @@ public class UserEntity {
     private Long pkId;
     @Basic
     @Column(name = "member_type_id", nullable = false, precision = 0)
-    private Long member_type_id;
+    private Long memberTypeId;
     @Basic
     @Column(name = "username", nullable = false, length = 200)
     private String username;
@@ -40,7 +40,7 @@ public class UserEntity {
     private String refCode;
     @Basic
     @Column(name = "salary", nullable = false, precision = 0)
-    private Integer salary;
+    private Long salary;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_type_id", referencedColumnName = "pk_id", insertable = false, updatable = false)
     private MemberTypeEntity memberType;
@@ -53,12 +53,12 @@ public class UserEntity {
         this.pkId = pkId;
     }
 
-    public Long getMember_type_id() {
-        return member_type_id;
+    public Long getMemberTypeId() {
+        return memberTypeId;
     }
 
-    public void setMember_type_id(Long member_type_id) {
-        this.member_type_id = member_type_id;
+    public void setMemberTypeId(Long memberTypeId) {
+        this.memberTypeId = memberTypeId;
     }
 
     public String getUsername() {
@@ -101,11 +101,11 @@ public class UserEntity {
         this.refCode = refCode;
     }
 
-    public Integer getSalary() {
+    public Long getSalary() {
         return salary;
     }
 
-    public void setSalary(Integer salary) {
+    public void setSalary(Long salary) {
         this.salary = salary;
     }
 
@@ -123,7 +123,7 @@ public class UserEntity {
         if (o == null || getClass() != o.getClass()) return false;
         UserEntity that = (UserEntity) o;
         return Objects.equals(pkId, that.pkId) &&
-                Objects.equals(member_type_id, that.member_type_id) &&
+                Objects.equals(memberTypeId, that.memberTypeId) &&
                 Objects.equals(username, that.username) &&
                 Objects.equals(password, that.password) &&
                 Objects.equals(address, that.address) &&
@@ -135,6 +135,6 @@ public class UserEntity {
     @Override
     public int hashCode() {
 
-        return Objects.hash(pkId, member_type_id, username, password, address, phone, refCode, salary);
+        return Objects.hash(pkId, memberTypeId, username, password, address, phone, refCode, salary);
     }
 }
