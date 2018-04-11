@@ -1,8 +1,12 @@
 package com.nok.baybackendtest.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -22,24 +26,39 @@ public class UserEntity {
     private Long pkId;
     @Basic
     @Column(name = "member_type_id", nullable = false, precision = 0)
+    @NotNull
+    @Min(value = 1)
     private Long memberTypeId;
     @Basic
     @Column(name = "username", nullable = false, length = 200)
+    @NotNull
+    @Size(min = 1, max = 200)
     private String username;
     @Basic
     @Column(name = "password", nullable = false, length = 80)
+    @NotNull
+    @Size(min = 1, max = 80)
+    @JsonIgnore
     private String password;
     @Basic
     @Column(name = "address", nullable = false, length = 2000)
+    @NotNull
+    @Size(min = 1, max = 2000)
     private String address;
     @Basic
     @Column(name = "phone", nullable = false, length = 50)
+    @NotNull
+    @Size(min = 1, max = 50)
     private String phone;
     @Basic
     @Column(name = "ref_code", nullable = false, length = 12)
+    @NotNull
+    @Size(min = 1, max = 12)
     private String refCode;
     @Basic
     @Column(name = "salary", nullable = false, precision = 0)
+    @NotNull
+    @Min(value = 0)
     private Long salary;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_type_id", referencedColumnName = "pk_id", insertable = false, updatable = false)

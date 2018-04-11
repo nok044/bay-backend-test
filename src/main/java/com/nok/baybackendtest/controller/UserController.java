@@ -15,6 +15,6 @@ public class UserController {
 
     @RequestMapping(value = "${application.context-path}/currentUser" , method = RequestMethod.GET)
     public UserEntity currentUser(){
-        return userService.currentUser();
+        return this.userService.currentUser();
     }
 }

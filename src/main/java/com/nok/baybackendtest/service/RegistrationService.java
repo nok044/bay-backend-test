@@ -7,7 +7,6 @@ import com.nok.baybackendtest.repository.MemberTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.PostConstruct;
 import java.util.List;
@@ -26,10 +25,9 @@ public class RegistrationService {
 
     @PostConstruct
     private void init(){
-        this.memberTypeList = memberTypeRepository.findAll(new Sort(Sort.Direction.DESC, "minimumSalary"));
+        this.memberTypeList = this.memberTypeRepository.findAll(new Sort(Sort.Direction.DESC, "minimumSalary"));
     }
 
-    @Transactional
     public UserEntity register(String username, String password, String address, String phone, Long salary){
         Optional<MemberTypeEntity> memberTypeResult = this.memberTypeList.stream().filter(memberType -> salary.compareTo(memberType.getMinimumSalary()) > 0).findFirst();
         MemberTypeEntity memberType = null;
@@ -38,6 +36,6 @@ public class RegistrationService {
         else
             throw new MininumSalaryException();
 
-        return userService.create(username, password, address, phone, salary, memberType);
+        return this.userService.create(username, password, address, phone, salary, memberType);
     }
 }
