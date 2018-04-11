@@ -1,7 +1,8 @@
 package com.nok.baybackendtest.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nok.baybackendtest.configuration.Application;
+import com.nok.baybackendtest.repository.UserRepository;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -26,8 +27,10 @@ public class RegistrationControllerTest {
     @Autowired
     private WebApplicationContext wac;
 
+    @Autowired
+    private UserRepository userRepository;
+
     private MockMvc mockMvc;
-    private ObjectMapper objectMapper = new ObjectMapper();
 
     @Before
     public void setup() {
@@ -55,5 +58,10 @@ public class RegistrationControllerTest {
                 .andExpect(jsonPath("$.address").value(address))
                 .andExpect(jsonPath("$.phone").value(phone))
                 .andExpect(jsonPath("$.salary").value(salary));
+    }
+
+    @After
+    public void clear(){
+        userRepository.deleteAll();
     }
 }
