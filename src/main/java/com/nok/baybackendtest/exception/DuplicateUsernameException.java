@@ -1,4 +1,14 @@
 package com.nok.baybackendtest.exception;
 
-public class DuplicateUsernameException extends RuntimeException{
+
+import com.nok.baybackendtest.component.CustomHttpException;
+import org.springframework.http.HttpStatus;
+
+public class DuplicateUsernameException extends CustomHttpException {
+
+    private HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
 }

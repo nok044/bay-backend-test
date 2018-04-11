@@ -1,4 +1,13 @@
 package com.nok.baybackendtest.exception;
 
-public class AuthenticationPrincipalNotFoundException extends RuntimeException {
+import com.nok.baybackendtest.component.CustomHttpException;
+import org.springframework.http.HttpStatus;
+
+public class AuthenticationPrincipalNotFoundException extends CustomHttpException {
+
+    private HttpStatus httpStatus = HttpStatus.BAD_REQUEST;
+
+    public HttpStatus getHttpStatus() {
+        return httpStatus;
+    }
 }
